@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeca Taco | Sabor y Tradición Familiar en Puebla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-principal: #FF6F00;
+            --color-secundario: #C62828;
+            --color-terracota: #D75A34;
+            --fondo-claro: #FFF8F0;
+            --texto-oscuro: #3E2723;
+            --texto-claro: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--fondo-claro);
+            color: var(--texto-oscuro);
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--texto-oscuro);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 248, 240, 0.98);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 50px;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .logo-container img {
+            height: 75px; 
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 20px; align-items: center; }
+        nav ul li a {
+            color: var(--texto-oscuro);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+            padding: 5px 0;
+        }
+        nav ul li a:hover { color: var(--color-principal); border-bottom: 2px solid var(--color-principal); }
+
+        .btn-cta {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+        .btn-cta:hover { background-color: var(--color-secundario); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            background: linear-gradient(rgba(255, 248, 240, 0.85), rgba(255, 248, 240, 0.92)), url('img/insta4.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero h1 span { color: var(--color-secundario); }
+        .hero p { font-size: 20px; max-width: 800px; margin-bottom: 40px; color: #5D4037; }
+
+        /* Secciones */
+        section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 50px;
+            color: var(--texto-oscuro);
+        }
+        .section-title span {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 5px;
+            background-color: var(--color-principal);
+            opacity: 0.5;
+            border-radius: 5px;
+        }
+
+        /* Buffet Banner */
+        .buffet-banner {
+            background: linear-gradient(135deg, var(--color-terracota), #B7410E);
+            color: white;
+            border-radius: 20px;
+            padding: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 30px rgba(215, 90, 52, 0.25);
+        }
+        .buffet-info h3 { font-size: 34px; color: white; margin-bottom: 15px; }
+        .buffet-info ul { list-style: none; margin-top: 20px; columns: 2; column-gap: 30px;}
+        .buffet-info ul li { margin-bottom: 12px; font-size: 17px; display: flex; align-items: center; gap: 10px; }
+        .buffet-info ul li i { color: #FFE0B2; }
+        .buffet-price-box {
+            background: white;
+            color: var(--color-secundario);
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 260px;
+            margin-top: 20px;
+        }
+        .buffet-price-box .price { font-size: 55px; font-weight: 900; margin: 5px 0; }
+
+        /* Menú Destacado */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .menu-category {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            border-top: 5px solid var(--color-principal);
+        }
+        .menu-category h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--color-secundario);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        .menu-item .name { font-weight: 600; color: #4E342E; max-width: 75%; }
+        .menu-item .price { font-weight: 700; color: var(--color-terracota); }
+
+        /* Galería */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            height: 280px;
+            background-color: #eee;
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover { transform: translateY(-5px); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item.wide { grid-column: span 2; }
+
+        /* Reseñas */
+        .review-card {
+            background-color: #FFF3E0;
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #FFE0B2;
+        }
+        .review-card .stars { color: var(--color-principal); margin-bottom: 12px; }
+        .review-card p { color: #5D4037; font-size: 16px; font-style: italic; }
+        .review-card .author { color: var(--color-secundario); font-weight: 700; margin-top: 15px; font-size: 15px;}
+
+        /* Ubicación & Mapa */
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border: 3px solid white;
+        }
+
+        /* Formulario */
+        .booking-section { background-color: white; border-radius: 20px; padding: 50px; border: 1px solid #ECEFF1; box-shadow: 0 5px 25px rgba(0,0,0,0.03);}
+        .form-group input, .form-group select {
+            background-color: #FAFAFA;
+            border: 1px solid #CFD8DC;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn-submit {
+            background-color: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-submit:hover { background-color: var(--color-principal); }
+
+        /* Footer */
+        footer { background-color: var(--texto-oscuro); color: #E0E0E0; padding: 50px 20px; }
+        .footer-content { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto;}
+        .footer-col h4 { color: white; font-size: 18px; margin-bottom: 20px; }
+        .footer-col ul li { margin-bottom: 10px; list-style: none; }
+        .footer-col ul li a { color: #E0E0E0; text-decoration: none; }
+        .social-icons a { background-color: rgba(255,255,255,0.1); color: white; padding: 10px 14px; border-radius: 50%; margin-right: 10px; transition: 0.3s;}
+        .social-icons a:hover { background-color: var(--color-principal); }
+
+        /* Botón WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 35px;
+            line-height: 60px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        @media (max-width: 768px) {
+            header { padding: 12px 20px; }
+            .logo-container img { height: 55px; }
+            nav ul { display: none; }
+            .hero h1 { font-size: 36px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item.wide { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/522211074177" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="img/logo.jpg" alt="Yeca Taco Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#buffet">El Buffet</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="#reservas" class="btn-cta">Reservar Mesa</a>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>El Auténtico Sabor de <span>Yecapixtla</span><br>en el Corazón de Puebla</h1>
+        <p>Disfruta en familia de nuestra cecina artesanal, tortillas hechas a mano al momento y un ambiente inigualable en San Manuel.</p>
+        <a href="#buffet" class="btn-cta" style="font-size: 18px; padding: 15px 35px;">Conoce Nuestro Buffet</a>
+    </section>
+
+    <!-- Buffet Section -->
+    <section id="buffet">
+        <h2 class="section-title"><span>Nuestro Famoso Buffet</span></h2>
+        <div class="buffet-banner">
+            <div class="buffet-info">
+                <h3>Buffet Diario de Tacos</h3>
+                <p style="color: #FFE0B2; font-size: 18px;">Todo lo que puedas comer con la mejor calidad y sazón artesanal de Puebla.</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Cecina de Yecapixtla</li>
+                    <li><i class="fas fa-check-circle"></i> Tortillas hechas a mano al momento</li>
+                    <li><i class="fas fa-check-circle"></i> Barra de salsas tradicionales</li>
+                    <li><i class="fas fa-check-circle"></i> Hora de coctelería incluida</li>
+                </ul>
+            </div>
+            <div class="buffet-price-box">
+                <h4>Precio por persona</h4>
+                <div class="price">$299</div>
+                <p>MXN</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 25px; color: #6D4C41; font-size: 17px;">
+            <strong>Horarios:</strong> Lunes de 09:00 am a 04:00 pm | Martes a Domingo de 09:00 am a 07:00 pm
+        </p>
+    </section>
+
+    <!-- Menú del Restaurante (Integrado del PDF) -->
+    <section id="menu">
+        <h2 class="section-title"><span>Conoce Nuestro Menú</span></h2>
+        <div class="menu-grid">
+            <!-- Desayunos -->
+            <div class="menu-category">
+                <h3><i class="fas fa-coffee"></i> Desayunos & Paquetes</h3>
+                <div class="menu-item">
+                    <span class="name">Desayuno en Paquete (Fruta y Café Refill)</span>
+                    <span class="price">$110 - $150</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Chilaquiles (Verde, Roja, Habanero o Bandera)</span>
+                    <span class="price">Variedad</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Aporreado (Cecina con huevo y salsa)</span>
+                    <span class="price">Delicia</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Café de Olla</span>
+                    <span class="price">$25.00</span>
+                </div>
+            </div>
+
+            <!-- Especialidades de la Casa -->
+            <div class="menu-category">
+                <h3><i class="fas fa-fire-flame-curved"></i> De la Casa</h3>
+                <div class="menu-item">
+                    <span class="name">Yeca Plato (Cecina, longaniza, nopales, queso asado)</span>
+                    <span class="price">$160.00</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Yeca Alambre (Carnes, morrón y queso gratinado)</span>
+                    <span class="price">$150.00</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Queso Fundido con Cecina</span>
+                    <span class="price">$140.00</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Taco de Cecina (Tortilla a mano)</span>
+                    <span class="price">$35.00</span>
+                </div>
+            </div>
+
+            <!-- Por Kilo y Antojitos -->
+            <div class="menu-category">
+                <h3><i class="fas fa-utensils"></i> Familiar & Antojitos</h3>
+                <div class="menu-item">
+                    <span class="name">Kilo de Cecina (Incluye tortillas, salsas y nopales)</span>
+                    <span class="price">$480.00</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Kilo de Longaniza o Enchilada</span>
+                    <span class="price">$290.00</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Cemita (Cecina, longaniza o carne enchilada)</span>
+                    <span class="price">$70.00</span>
+                </div>
+                <div class="menu-item">
+                    <span class="name">Frijoles en su Jugo</span>
+                    <span class="price">$50.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería con las 5 fotos nuevas nombradas insta1 a insta5 -->
+    <section id="galeria">
+        <h2 class="section-title"><span>Galería de Instagram</span></h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="img/insta1.jpg" alt="Tacos artesanales Yeca Taco">
+            </div>
+            <div class="gallery-item">
+                <img src="img/insta2.jpg" alt="Platillo especial con aguacate y queso">
+            </div>
+            <div class="gallery-item">
+                <img src="img/insta3.jpg" alt="Tacos con tortilla azul y salsa">
+            </div>
+            <div class="gallery-item wide">
+                <img src="img/insta4.jpg" alt="Cocina y barra de Yeca Taco">
+            </div>
+            <div class="gallery-item">
+                <img src="img/insta5.jpg" alt="Café de olla y pan dulce tradicional">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Reseñas -->
+    <section id="resenas">
+        <h2 class="section-title"><span>Lo que dicen nuestros clientes</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"Buen ambiente, buen sazón muy bonito lugar felicidades!"</p>
+                <div class="author">- Cliente de Google Maps</div>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"La comida es deliciosa, con porciones generosas y bien servidas. Las tortillas a mano son lo mejor."</p>
+                <div class="author">- Comensal Verificado</div>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"Excelente opción para comer o desayunar en San Manuel. El buffet vale totalmente la pena."</p>
+                <div class="author">- Visitante Frecuente</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación y Google Maps Interactivo -->
+    <section id="ubicacion">
+        <h2 class="section-title"><span>¿Dónde Nos Encontramos?</span></h2>
+        <p style="text-align: center; margin-bottom: 20px; font-size: 18px; color: #5D4037;">
+            <i class="fas fa-map-marker-alt" style="color: var(--color-secundario);"></i> Cto Juan Pablo II 1824, Jardines de San Manuel, 72570 Heroica Puebla de Zaragoza, Pue.
+        </p>
+        <div class="map-container">
+            <iframe width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.758368537651!2d-98.1968383!3d19.0152671!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc150e694ed95%3A0x395b0e7032cc4095!2sYeca%20Taco!5e0!3m2!1ses-419!2smx!4v1710000000000"></iframe>
+        </div>
+    </section>
+
+    <!-- Formulario de Reservas -->
+    <section id="reservas">
+        <div class="booking-section">
+            <h2 class="section-title" style="margin-bottom: 20px;"><span>Reserva tu Mesa</span></h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 16px; color: #5D4037;">Llena el formulario para apartar tu lugar de manera instantánea.</p>
+            
+            <form id="reservaForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group" style="grid-column: span 2;">
+                    <input type="text" id="nombre" required placeholder="Nombre Completo">
+                </div>
+                <div class="form-group">
+                    <input type="date" id="fecha" required>
+                </div>
+                <div class="form-group">
+                    <input type="time" id="horario" required value="14:00">
+                </div>
+                <div class="form-group">
+                    <select id="personas">
+                        <option value="2">2 Personas</option>
+                        <option value="4" selected>4 Personas</option>
+                        <option value="6">6 Personas</option>
+                        <option value="8">8+ Personas (Grupo)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="telefono" required placeholder="Teléfono de Contacto">
+                </div>
+                <div style="grid-column: span 2; text-align: center; margin-top: 15px;">
+                    <button type="submit" class="btn-submit">Confirmar Reserva</button>
+                </div>
+            </form>
+            <div id="alert-box" style="display:none; margin-top:20px; padding:15px; border-radius:10px; background:#C8E6C9; color:#2E7D32; text-align:center; font-weight:bold;"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Yeca Taco San Manuel</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Cto Juan Pablo II 1824,</li>
+                    <li>Jardines de San Manuel,</li>
+                    <li>72570 Puebla, Pue.</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Horarios</h4>
+                <ul>
+                    <li>Lunes: 9:00 am - 4:00 pm</li>
+                    <li>Martes a Domingo: 9:00 am - 7:00 pm</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto y Redes</h4>
+                <ul>
+                    <li><i class="fas fa-phone" style="margin-right: 8px;"></i><a href="tel:2211074177">221 107 4177</a></li>
+                    <li class="social-icons" style="margin-top: 15px;">
+                        <a href="https://www.instagram.com/yeca.taco" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/522211074177" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; font-size: 13px; color: #9E9E9E;">
+            &copy; 2026 Yeca Taco. Demo comercial diseñado para presentación de desarrollo web.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('reservaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const alertBox = document.getElementById('alert-box');
+            alertBox.style.display = 'block';
+            alertBox.innerHTML = `¡Gracias, ${nombre}! Tu reserva ha sido procesada con éxito. Te esperamos en Yeca Taco.`;
+            document.getElementById('reservaForm').reset();
+            setTimeout(() => { alertBox.style.display = 'none'; }, 6000);
+        });
+
+        document.getElementById('fecha').min = new Date().toISOString().split("T")[0];
+    </script>
+</body>
+</html>
